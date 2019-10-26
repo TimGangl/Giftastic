@@ -1,10 +1,10 @@
-<!DOCTYPE <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Music Genre Gify Search!</title>
+    <title>Music Genre Giphy Search!</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -12,20 +12,26 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-    <div class=" container-fluid">
-        <h1 class="text-center">Music Genre Gify Search</h1>
+<body style="background: url('assets/cork-board/cork-board.png')">
+    <div class="container-fluid">
+        <h1 class="text-center">Music Genre Giphy Search</h1>
+        <!--div for buttons-->
         <div class="row">
             <div id="button-view" class="col-12 s-2"></div>
         </div>
         <div class="row">
             <div class="col-8">
-                <div id="music-view"></div>
+                <!--div for gifs-->
+                <div class="display-box">
+                    <div id="music-view"></div>
+                </div>
             </div>
+            <!--div for form-->
             <div class="col-4">
                 <form id="music-form">
                     <label for="music-input">Add a Music Genre, here!</label>
-                    <input type="text" id="music-input">
+                    <input type="text" id="music-input" placeholder="type here">
+                    <br />
                     <br />
                     <input id="add-music" type="submit" value="Click for more music!">
                 </form>
