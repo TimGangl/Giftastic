@@ -15,30 +15,42 @@ $(document).ready(function () {
 
         }
     }
-
+    renderButtons();
     //getting info from giphy api
     function displayMusicInfo() {
         var topic = $(this).text();
         var queryURL = "https://api.giphy.com/v1/gifs/search?&limit=10&q=" + topic + "&apikey=0zZILNFM54RkhIOwIgD8PJ7wXBK1APDd";
-
+        $("#display-box").empty();
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
             var responseData = response.data;
             for (i = 0; i < responseData.length; i++) {
+                var musicView = $("<div>").addClass("music-view d-inline-block p-3");
                 var musicDiv = $("<img>").addClass("music-div");
                 var pOne = $("<p>").text("Rating: " + responseData[i].rating);
-                $("#music-view").append(pOne);
-                var imgStore = responseData[i].images.url;
+                var imgStore = responseData[i].images.fixed_height_still.url;
                 musicDiv.attr("src", imgStore);
-                $("#music-view").append(musicDiv);
-                $(".display-box").append($("#music-view"));
+                musicDiv.attr("data-animate-img", responseData[i].images.fixed_height.url);
+                musicDiv.attr("data-still-img", imgStore);
+                musicDiv.attr("data-go", false);
+                musicView.append(musicDiv);
+                musicView.append(pOne);
+                $("#display-box").append(musicView);
             }
         });
 
     }
+    function animate() {
+        if ($(this).attr("data-go") === false) {
+            $(this).attr("src", $(this).attr("data-animate-img"))
+            $(this).attr("data-go", true)
+        } else {
+            $(this).attr("src", $(this).attr("data-still-img"))
+        } $(this).attr("data-go", false)
 
+    }
 
     $("#add-music").on("click", function (event) {
         event.preventDefault();
@@ -47,6 +59,6 @@ $(document).ready(function () {
         renderButtons();
     });
     $(document).on("click", ".music-btn", displayMusicInfo);
-    renderButtons();
+    $(document).on("click", ".music-view", animate);
 
 });
