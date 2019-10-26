@@ -34,7 +34,7 @@ $(document).ready(function () {
                 musicDiv.attr("src", imgStore);
                 musicDiv.attr("data-animate-img", responseData[i].images.fixed_height.url);
                 musicDiv.attr("data-still-img", imgStore);
-                musicDiv.attr("data-go", false);
+                musicDiv.attr("data-go", "false");
                 musicView.append(musicDiv);
                 musicView.append(pOne);
                 $("#display-box").append(musicView);
@@ -43,12 +43,19 @@ $(document).ready(function () {
 
     }
     function animate() {
-        if ($(this).attr("data-go") === false) {
+        console.log("click");
+
+        if ($(this).attr("data-go") == "false") {
             $(this).attr("src", $(this).attr("data-animate-img"))
-            $(this).attr("data-go", true)
-        } else {
+            $(this).attr("data-go", "true")
+            console.log("still")
+        }
+        else {
             $(this).attr("src", $(this).attr("data-still-img"))
-        } $(this).attr("data-go", false)
+            console.log("moving")
+
+            $(this).attr("data-go", "false")
+        }
 
     }
 
@@ -59,6 +66,6 @@ $(document).ready(function () {
         renderButtons();
     });
     $(document).on("click", ".music-btn", displayMusicInfo);
-    $(document).on("click", ".music-view", animate);
+    $(document).on("click", "img", animate);
 
 });
